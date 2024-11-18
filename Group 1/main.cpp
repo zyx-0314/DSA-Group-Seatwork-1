@@ -34,15 +34,13 @@ int main() {
 		switch (choice) {
 		// 2.1 Register Patient
 		case 1:
-			// 2.1.1 Initialize a boolean which indicates if the data is not yet stored
-			bool isNotStored = false;
-
 			std::cout << "\nRegistering Patient\n";
-			// 2.1.2 Loop for each patient until last slot
+			// 2.1.1 Loop for each patient until last slot
 			for (int i = 0; i < MAX_PATIENT; i++)
 			{
-				// 2.1.3 Check each patient id if it has value of 0
+				// 2.1.2 Check each patient id if it has value of 0
 				if (!patient[i].notOccupied) {
+					// 2.1.3 Enter Full Data Requirements
 					PatientDataEntry(patient[i]);		// Pass reference to the patient
 				}
 			}
@@ -55,18 +53,22 @@ int main() {
 			{
 				// 2.2.2 Check each patient id if it has value is more than 0
 				if (!patient[i].notOccupied) {
-					DisplayPatient(patient[i]);
+					// 2.2.3 Display patient data
+					DisplayPatientList(patient[i]);
 				}
 			}
 			break;
+		// 2.3 Update patients details
 		case 3:
-			int choice;
+			do {
+				std::cout
+					<< "\nUpdating Patient Details\n"
+					<< "\nEnter ID (1 -" << MAX_PATIENT << "): ";
+				std::cin >> choice;
+			} while(1 > choice || MAX_PATIENT < choice);
 
-			std::cout
-				<< "\nUpdating Patient Details\n"
-				<< "\nEnter ID (1 -" << MAX_PATIENT << "): ";
-			std::cin >> choice;
-			PatientDataEntry(patient[choice]); // Update the patient data
+			// 2.3.1 Enter Full Data Requirements
+			PatientDataEntry(patient[choice]); 
 			break;
 		case 4:
 			// Exit the program
@@ -115,3 +117,4 @@ void Menu(int& choice)
 	std::cin >> choice; // Read the user's choice
 	std::cin.clear(); // This clears the input buffer to avoid issues with the next input
 }
+
